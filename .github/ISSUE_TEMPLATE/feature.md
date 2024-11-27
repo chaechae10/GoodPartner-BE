@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "Feat #number name (Feat #10 blahblah)"
+title: "[feat] #number name ([feat] #10 blahblah)"
 labels: ''
 assignees: ''
 

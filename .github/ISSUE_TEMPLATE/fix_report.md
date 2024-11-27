@@ -1,7 +1,7 @@
 ---
 name: Fix report
 about: Create a report to help us improve
-title: "Fix #number name (Fix #10 blahblah)"
+title: "[fix] #number name ([fix] #10 blahblah)"
 labels: ''
 assignees: ''
 
