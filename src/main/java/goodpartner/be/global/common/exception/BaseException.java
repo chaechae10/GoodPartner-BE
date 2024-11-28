@@ -1,4 +1,4 @@
-package goodpartner.be.global.auth.exception;
+package goodpartner.be.global.common.exception;
 
 import lombok.Getter;
 

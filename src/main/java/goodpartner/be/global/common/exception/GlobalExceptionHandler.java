@@ -1,4 +1,4 @@
-package goodpartner.be.global.auth.exception;
+package goodpartner.be.global.common.exception;
 
 import goodpartner.be.global.common.response.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
