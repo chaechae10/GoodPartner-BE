@@ -32,11 +32,11 @@ public class JwtProvider {
         this.key = new SecretKeySpec(jwtKey.getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 
-    public String generateAccessToken(String email) {
+    public String generateAccessToken(UUID userId) {
         final Date now = new Date();
         final Date expiration = new Date(now.getTime() + accessTokenExpirationTime);
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(userId.toString())
                 .setIssuedAt(now)
                 .setExpiration(expiration)
                 .signWith(key)
@@ -80,8 +80,8 @@ public class JwtProvider {
 
     public Authentication getAuthentication(String token) {
         Claims claims = parseToken(token);
-        String email = claims.getSubject();
+        String userId = claims.getSubject();
 
-        return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
     }
 }
