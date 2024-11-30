@@ -26,10 +26,11 @@ public class User {
 
     private String tel;
 
-    public static User of(Long kakaoId, String email) {
+    public static User of(Long kakaoId, String email, String name) {
         return User.builder()
                 .kakaoId(kakaoId)
                 .email(email)
+                .name(name)
                 .build();
     }
 }

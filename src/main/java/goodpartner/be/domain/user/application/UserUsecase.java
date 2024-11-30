@@ -31,7 +31,6 @@ public class UserUsecase {
     public SocialLoginResponse login(SocialLoginRequest dto) {
         KakaoTokenResponse tokenResponse = kakaoAuthService.getKakaoToken(dto.authCode());
         KakaoUserInfoResponse userInfo = kakaoAuthService.getUserInfo(tokenResponse.access_token());
-        log.info("닉네임, {}", userInfo.kakao_account().profile().nickname());
 
         if (existUser(userInfo)) {
             return login(userInfo);
@@ -44,7 +43,10 @@ public class UserUsecase {
     }
 
     private SocialLoginResponse registerUser(KakaoUserInfoResponse userInfo) {
-        User user = User.of(userInfo.id(), userInfo.kakao_account().email());
+        String email = userInfo.kakao_account().email();
+        String nickName = userInfo.kakao_account().profile().nickname();
+
+        User user = User.of(userInfo.id(), email, nickName);
         userSaveService.saveUser(user);
 
         String accessToken = jwtProvider.generateAccessToken(userInfo.kakao_account().email());
