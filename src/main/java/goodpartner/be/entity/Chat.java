@@ -2,10 +2,8 @@ package goodpartner.be.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import global.common.entity.BaseTimeEntity;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -14,11 +12,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "chat")
-public class Chat extends BaseEntity{
+public class Chat extends BaseTimeEntity{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private UUID userId;
+
+    @Column(columnDefinition = "TEXT")
     private String message;
 
     @Enumerated(EnumType.STRING)

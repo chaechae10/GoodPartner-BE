@@ -20,7 +20,7 @@ public class ChatController {
     private final ChatService chatService;
 
     //1.사용자 채팅 내역 조회
-    @PostMapping("/users/social-login")
+    @GetMapping("/chats")
     public ResponseEntity<List<Chat>> getUserChatHistory(@RequestParam UUID userId){
         List<Chat> userChatHistory = chatService.getUserChatHistory(userId);
         return ResponseEntity.ok(userChatHistory);
@@ -34,7 +34,7 @@ public class ChatController {
     }
 
     //3.누적 질문수 조회
-    @GetMapping("/chats")
+    @GetMapping("/chats/count")
     public ResponseEntity<Long> getTotalQuestions(){
         Long totalQuestions = chatService.getTotalQuestions();
         return ResponseEntity.ok(totalQuestions);
