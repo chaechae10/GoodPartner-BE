@@ -1,8 +1,8 @@
-package goodpartner.be.entity;
+package goodpartner.be.domain.chat.entity;
 
+import goodpartner.be.global.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import global.common.entity.BaseTimeEntity;
 
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "chat")
-public class Chat extends BaseTimeEntity{
+public class Chat extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

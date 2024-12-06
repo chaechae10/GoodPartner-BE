@@ -1,4 +1,4 @@
-package goodpartner.be.dto.request;
+package goodpartner.be.domain.chat.application.dto.request;
 
 import lombok.Builder;
 import lombok.Data;

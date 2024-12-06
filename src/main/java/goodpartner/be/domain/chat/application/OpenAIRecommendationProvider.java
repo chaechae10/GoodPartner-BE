@@ -1,7 +1,7 @@
-package goodpartner.be;
+package goodpartner.be.domain.chat.application;
 
-import goodpartner.be.dto.request.Message;
-import goodpartner.be.dto.response.OpenAIResponse;
+import goodpartner.be.domain.chat.application.dto.request.Message;
+import goodpartner.be.domain.chat.application.dto.response.OpenAIResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,6 +1,6 @@
-package goodpartner.be.repository;
+package goodpartner.be.domain.chat.repository;
 
-import goodpartner.be.entity.Chat;
+import goodpartner.be.domain.chat.entity.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

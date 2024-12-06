@@ -1,7 +1,7 @@
-package goodpartner.be.dto.response;
+package goodpartner.be.domain.chat.application.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import goodpartner.be.dto.request.Message;
+import goodpartner.be.domain.chat.application.dto.request.Message;
 
 import java.util.List;
 

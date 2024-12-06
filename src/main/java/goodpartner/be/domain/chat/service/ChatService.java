@@ -1,9 +1,9 @@
-package goodpartner.be.service;
+package goodpartner.be.domain.chat.service;
 
-import goodpartner.be.OpenAIRecommendationProvider;
-import goodpartner.be.dto.response.OpenAIResponse;
-import goodpartner.be.entity.Chat;
-import goodpartner.be.repository.ChatRepository;
+import goodpartner.be.domain.chat.application.OpenAIRecommendationProvider;
+import goodpartner.be.domain.chat.application.dto.response.OpenAIResponse;
+import goodpartner.be.domain.chat.entity.Chat;
+import goodpartner.be.domain.chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
