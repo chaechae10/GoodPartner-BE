@@ -1,6 +1,7 @@
 package goodpartner.be.domain.user.entity;
 
 import goodpartner.be.domain.user.application.dto.request.UserUpdateRequest;
+import goodpartner.be.global.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Getter
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
