@@ -55,6 +55,6 @@ public class ChatService {
 
     //4.최근 질문 3개 조회
     public List<Chat> getLatestChats() {
-        return chatRepository.findTop3ByOrderByCreatedAtDesc();
+        return chatRepository.findTop3ByStatusOrderByCreatedAtDesc(Chat.Status.REQUEST);
     }
 }
