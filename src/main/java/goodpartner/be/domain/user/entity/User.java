@@ -1,5 +1,7 @@
 package goodpartner.be.domain.user.entity;
 
+import goodpartner.be.domain.user.application.dto.request.UserUpdateRequest;
+import goodpartner.be.global.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Getter
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,5 +34,11 @@ public class User {
                 .email(email)
                 .name(name)
                 .build();
+    }
+
+    public void update(UserUpdateRequest dto) {
+        this.email = dto.email();
+        this.name = dto.name();
+        this.tel = dto.tel();
     }
 }

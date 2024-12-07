@@ -1,10 +1,13 @@
 package goodpartner.be.domain.user.application;
 
 import goodpartner.be.domain.user.application.dto.request.SocialLoginRequest;
+import goodpartner.be.domain.user.application.dto.request.UserUpdateRequest;
 import goodpartner.be.domain.user.application.dto.response.SocialLoginResponse;
+import goodpartner.be.domain.user.application.dto.response.UserResponse;
 import goodpartner.be.domain.user.entity.User;
 import goodpartner.be.domain.user.service.UserGetService;
 import goodpartner.be.domain.user.service.UserSaveService;
+import goodpartner.be.domain.user.service.UserUpdateService;
 import goodpartner.be.global.auth.jwt.JwtProvider;
 import goodpartner.be.global.auth.kakao.KakaoAuthService;
 import goodpartner.be.global.auth.kakao.dto.KakaoTokenResponse;
@@ -13,6 +16,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 import static goodpartner.be.domain.user.entity.enums.LoginStatus.LOGIN;
 import static goodpartner.be.domain.user.entity.enums.LoginStatus.REGISTER;
@@ -25,6 +30,7 @@ public class UserUsecase {
     private final KakaoAuthService kakaoAuthService;
     private final UserSaveService userSaveService;
     private final UserGetService userGetService;
+    private final UserUpdateService userUpdateService;
     private final JwtProvider jwtProvider;
 
     @Transactional
@@ -42,6 +48,19 @@ public class UserUsecase {
         return userGetService.check(userInfo.id());
     }
 
+    public UserResponse getUser(String userId) {
+        UUID id = UUID.fromString(userId);
+        User user = userGetService.getUser(id);
+        return UserResponse.from(user);
+    }
+
+    @Transactional
+    public void update(UserUpdateRequest dto, String userId) {
+        UUID id = UUID.fromString(userId);
+        User user = userGetService.getUser(id);
+        userUpdateService.updateUser(user, dto);
+    }
+
     private SocialLoginResponse registerUser(KakaoUserInfoResponse userInfo) {
         String email = userInfo.kakao_account().email();
         String nickName = userInfo.kakao_account().profile().nickname();
@@ -49,7 +68,7 @@ public class UserUsecase {
         User user = User.of(userInfo.id(), email, nickName);
         userSaveService.saveUser(user);
 
-        String accessToken = jwtProvider.generateAccessToken(userInfo.kakao_account().email());
+        String accessToken = jwtProvider.generateAccessToken(user.getId());
         String refreshToken = jwtProvider.generateRefreshToken();
 
         return SocialLoginResponse.of(user.getId(), REGISTER, accessToken, refreshToken);
@@ -58,7 +77,7 @@ public class UserUsecase {
     private SocialLoginResponse login(KakaoUserInfoResponse userInfo) {
         User user = userGetService.getUser(userInfo.id());
 
-        String accessToken = jwtProvider.generateAccessToken(userInfo.kakao_account().email());
+        String accessToken = jwtProvider.generateAccessToken(user.getId());
         String refreshToken = jwtProvider.generateRefreshToken();
 
         return new SocialLoginResponse(user.getId(), LOGIN, accessToken, refreshToken);
